@@ -9,6 +9,16 @@ MediCine Finder is a web application that helps users search for medicines quick
 This project is built to simplify the process of finding medicines. Users can search for medicines and get relevant details through a clean and responsive interface.
 
 ---
+## 🛠️ Tech Stack
+### Frontend
+- React.js   
+- Tailwind CSS
+- JavaScript  
+
+### Backend
+- Node.js
+- mongoose
+- Express.js
 
 ## 🚀 Features
 
@@ -36,16 +46,7 @@ This project is built to simplify the process of finding medicines. Users can se
 - Save time by finding the required medicine without visiting multiple stores  
 - Useful in **emergency situations**
   
-## 🛠️ Tech Stack
-### Frontend
-- React.js   
-- Tailwind CSS
-- JavaScript  
 
-### Backend
-- Node.js
-- mongoose
-- Express.js  
 
 ### Tools
 - Git  
