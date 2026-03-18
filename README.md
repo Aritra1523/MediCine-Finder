@@ -6,7 +6,7 @@ MediCine Finder is a web application that helps users search for medicines quick
 
 ## 📖 Overview
 
-This project is built to simplify the process of finding medicines. Users can search for medicines and get relevant details through a clean and responsive interface.
+This project is built to simplify the process of finding medicines. Users can search for medicines and get relevant details through a clean and responsive interface. Pharmacists can manage their inventory efficiently by adding, editing, or deleting medicines.
 
 ---
 ## 🛠️ Tech Stack
