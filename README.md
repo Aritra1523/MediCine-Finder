@@ -55,4 +55,9 @@ This project is built to simplify the process of finding medicines. Users can se
 
 ---
 
+## ⚙️ Installation & Setup
 
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Aritra1523/MediCine-Finder.git
+cd MediCine-Finder
