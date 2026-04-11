@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function UserNavbar() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
     navigate("/login");
   };
-
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
+  }, []);
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow z-50">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        
         {/* LOGO */}
         <h1
           className="text-2xl font-extrabold text-blue-600 cursor-pointer"
@@ -29,8 +32,14 @@ export default function UserNavbar() {
             className="flex items-center gap-2 bg-gray-100 px-3 py-2
                        rounded-full hover:bg-gray-200 transition"
           >
-            <span className="text-sm font-medium">User</span>
-            <span className="text-xl">👤</span>
+            <span className="text-sm font-medium">{user?.name || "User"}</span>
+            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white text-sm font-semibold">
+              {user?.name
+                ?.split(" ")
+                .map((n) => n[0])
+                .join("")
+                .toUpperCase() || "U"}
+            </span>
           </button>
 
           {/* DROPDOWN */}

@@ -16,10 +16,10 @@ export default function Login() {
     try {
       setLoading(true);
       const res = await login({ email, password });
-
+      localStorage.setItem("user",JSON.stringify(res.data) );
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
-
+      // localStorage.setItem("user",res.data.name)
       if (res.data.role === "pharmacist") {
         localStorage.setItem("shopId", res.data.shopId);
       }
@@ -42,9 +42,7 @@ export default function Login() {
         <h2 className="text-3xl font-bold text-center text-blue-600">
           Welcome Back
         </h2>
-        <p className="text-center text-gray-500 mt-1">
-          Login to your account
-        </p>
+        <p className="text-center text-gray-500 mt-1">Login to your account</p>
 
         {/* Form */}
         <div className="mt-6 space-y-4">

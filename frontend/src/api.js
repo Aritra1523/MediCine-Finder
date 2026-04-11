@@ -24,7 +24,7 @@ export const getNearbyShops = (lat, lng) =>
 export const searchMedicines = (query) =>
   API.get(`/medicines/search?q=${query}`);
 
-// PHARMACIST ✅ (THIS FIXES YOUR ERROR)
+// PHARMACIST 
 export const addMedicine = (data) =>
   API.post("/pharmacist/medicine", data);
 
