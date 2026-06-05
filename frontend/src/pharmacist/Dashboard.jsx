@@ -44,11 +44,11 @@ export default function Dashboard() {
       setForm({ name: "", price: "", stock: "", unit: "tablet", unitQty: 1 });
       loadMeds();
       toast.success("Medicine added successfully");
-      console.log("MEDICINE DATA:", medicines);
-      console.log(form.unit);
+      // console.log("MEDICINE DATA:", medicines);
+      // console.log(form.unit);
     } catch (err) {
       toast.error("Failed to add medicine");
-      console.error(err);
+      // console.error(err);
     }
   };
 

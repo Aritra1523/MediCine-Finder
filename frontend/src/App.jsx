@@ -6,6 +6,7 @@ import Register from "./auth/Register";
 
 import SearchMedicine from "./user/SearchMedicine";
 import Dashboard from "./pharmacist/Dashboard";
+import Profile from "./user/Profile";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -13,38 +14,39 @@ function App() {
 
   return (
     <BrowserRouter>
-    
-     <Routes>
+      <Routes>
+        {/* Default Route */}
+        <Route path="/" element={<Navigate to="/register" />} />
 
-  {/* Default Route */}
-  <Route path="/" element={<Navigate to="/register" />} />
+        {/* Public Routes */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
-  {/* Public Routes */}
-  <Route path="/register" element={<Register />} />
-  <Route path="/login" element={<Login />} />
+        {/* User Routes */}
+        {token && role === "user" && (
+          <Route path="/user" element={<SearchMedicine />} />
+        )}
 
-  {/* User Routes */}
-  {token && role === "user" && (
-    <Route path="/user" element={<SearchMedicine />} />
-  )}
-
-  {/* Pharmacist Routes */}
-  {token && role === "pharmacist" && (
-    <Route path="/pharmacist" element={<Dashboard />} />
-  )}
-
-  {/* Fallback */}
-  <Route
-    path="*"
-    element={
-      token
-        ? <Navigate to={role === "pharmacist" ? "/pharmacist" : "/user"} />
-        : <Navigate to="/login" />
-    }
-  />
-
-</Routes>
-
+        {/* Pharmacist Routes */}
+        {token && role === "pharmacist" && (
+          <Route path="/pharmacist" element={<Dashboard />} />
+        )}
+        <Route
+          path="/profile"
+          element={token ? <Profile /> : <Navigate to="/login" />}
+        />
+        {/* Fallback */}
+        <Route
+          path="*"
+          element={
+            token ? (
+              <Navigate to={role === "pharmacist" ? "/pharmacist" : "/user"} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
