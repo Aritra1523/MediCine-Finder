@@ -54,8 +54,8 @@ router.post("/medicine", auth, async (req, res) => {
       price: req.body.price,
       stock: req.body.stock,
       shopId: shop._id,
-      unit: req.body.unit || "tablet",      
-      unitQty: req.body.unitQty || 1  
+      unit: req.body.unit || "tablet",
+      unitQty: req.body.unitQty || 1
     });
 
     res.status(201).json(medicine);

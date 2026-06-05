@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Shop from "../models/Shop.js";
-
+import verifyToken from "../middleware/authMiddleware.js"
 const router = express.Router();
 
 // REGISTER
@@ -81,12 +81,67 @@ router.post("/login", async (req, res) => {
       token,
       role: user.role,
       shopId,
-      name:user.name
+      name: user.name
     });
 
   } catch (err) {
     console.error("LOGIN ERROR:", err);
     res.status(500).json({ msg: "Login failed" });
+  }
+});
+
+// UPDATE PROFILE
+router.put("/update-profile", verifyToken, async (req, res) => {
+  try {
+    const { name, email, phone, password } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // ✅ Update only if field is NOT empty
+    if (name && name.trim() !== "") {
+      user.name = name;
+    }
+
+    if (email && email.trim() !== "") {
+      // 🔥 check duplicate email
+      if (email !== user.email) {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          return res.status(400).json({ msg: "Email already exists" });
+        }
+      }
+      user.email = email;
+    }
+
+    if (phone && phone.trim() !== "") {
+      user.phone = phone;
+    }
+
+    // ✅ Password update (optional)
+    if (password && password.trim() !== "") {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+
+    res.json({
+      msg: "Profile updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 });
 
