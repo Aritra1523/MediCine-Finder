@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { register } from "../api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -27,10 +27,9 @@ export default function Register() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/auth/register", form);
+      await register(form);
       toast.success("Registration successful. Please login.");
       navigate("/login");
-      
     } catch (err) {
       toast.error(err.response?.data?.msg || "Registration failed");
     } finally {
@@ -41,7 +40,6 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-        {/* Title */}
         <h2 className="text-3xl font-bold text-center text-blue-600">
           Create Account
         </h2>
@@ -49,7 +47,6 @@ export default function Register() {
           Register to continue
         </p>
 
-        {/* Form */}
         <div className="mt-6 space-y-4">
           <input
             name="name"
@@ -81,14 +78,13 @@ export default function Register() {
             className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          <select 
+          <select
             name="role"
             onChange={handleChange}
             className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
           >
             <option value="user">User</option>
             <option value="pharmacist">Pharmacist</option>
-            
           </select>
 
           <button
@@ -100,7 +96,6 @@ export default function Register() {
           </button>
         </div>
 
-        {/* Footer */}
         <p className="text-sm text-center text-gray-500 mt-6">
           Already have an account?{" "}
           <span
