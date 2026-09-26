@@ -5,21 +5,21 @@ import auth from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-/* ================= USER ROUTES ================= */
+/* USER ROUTES */
 
-// 🔍 Search medicine
+//  Search medicine
 router.get("/search", async (req, res) => {
   try {
     const { q } = req.query;
 
     let medicines;
 
-    // 🔹 IF NO SEARCH → LOAD ALL (LIMITED)
+    //  IF NO SEARCH → LOAD ALL (LIMITED)
     if (!q) {
       medicines = await Medicine.find()
         .populate("shopId", "shopName phone")
         .sort({ price: 1 })
-        .limit(50); // 🔥 important (performance)
+        .limit(50); // 
     } else {
       medicines = await Medicine.find({
         name: { $regex: q, $options: "i" },
@@ -49,8 +49,8 @@ router.get("/search", async (req, res) => {
         name: med.name,
         price: med.price,
         stock: med.stock,
-        unit: med.unit || "tablet",      // ✅ IMPORTANT
-        unitQty: med.unitQty || 1,        // ✅ IMPORTANT
+        unit: med.unit || "tablet",     
+        unitQty: med.unitQty || 1,       
       });
     });
 
@@ -62,7 +62,7 @@ router.get("/search", async (req, res) => {
 });
 
 
-// ✏️ Update medicine
+//  Update medicine
 router.put("/update/:id", auth, async (req, res) => {
   try {
     if (req.user.role !== "pharmacist") {
@@ -82,7 +82,7 @@ router.put("/update/:id", auth, async (req, res) => {
 });
 
 
-// ❌ Delete medicine
+//  Delete medicine
 router.delete("/delete/:id", auth, async (req, res) => {
   try {
     if (req.user.role !== "pharmacist") {
@@ -98,7 +98,7 @@ router.delete("/delete/:id", auth, async (req, res) => {
 
 
 
-// 🏪 Get shop medicines
+//  Get shop medicines
 router.get("/shop/:id", async (req, res) => {
   try {
     const meds = await Medicine.find({ shopId: req.params.id });
@@ -108,12 +108,12 @@ router.get("/shop/:id", async (req, res) => {
   }
 });
 
-/* ================= PHARMACIST ROUTES ================= */
+/*  PHARMACIST ROUTES  */
 
 // ➕ Add medicine (PHARMACIST ONLY)
 router.post("/add", auth, async (req, res) => {
   try {
-    // 🔐 role check
+    //  role check
     if (req.user.role !== "pharmacist") {
       return res.status(403).json({ msg: "Access denied" });
     }
@@ -137,9 +137,9 @@ router.post("/add", auth, async (req, res) => {
       price,
       stock,
       shopId: shop._id,
-      unit,          // ✅ MUST BE HERE
+      unit,          
       unitQty: unitQty || 1,
-      // ✅ CORRECT
+      
     });
 
     res.status(201).json(medicine);
@@ -151,7 +151,7 @@ router.post("/add", auth, async (req, res) => {
 
 });
 
-// 📋 Get my medicines
+//  Get my medicines
 router.get("/my", auth, async (req, res) => {
   try {
     const shop = await Shop.findOne({ owner: req.user.id });

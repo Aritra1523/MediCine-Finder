@@ -5,7 +5,7 @@ import Medicine from "../models/Medicine.js";
 
 const router = express.Router();
 
-/* ================= SHOP ================= */
+/*  SHOP  */
 
 // Create shop (only once per pharmacist)
 router.post("/shop", auth, async (req, res) => {
