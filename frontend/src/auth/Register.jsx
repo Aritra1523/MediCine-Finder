@@ -8,13 +8,24 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [focused, setFocused] = useState("");
   const [form, setForm] = useState({
-    name: "", email: "", password: "", phone: "", role: "user",
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    role: "user",
   });
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleRegister = async () => {
-    if (!form.name || !form.email || !form.password || !form.phone || !form.role) {
+    if (
+      !form.name ||
+      !form.email ||
+      !form.password ||
+      !form.phone ||
+      !form.role
+    ) {
       toast.error("Please fill all fields");
       return;
     }
@@ -197,17 +208,27 @@ export default function Register() {
             <span className="reg-brand-name">MediCine Finder</span>
           </div>
           <div className="reg-left-content">
-            <h1 className="reg-left-title">Join thousands finding medicines <span>faster</span></h1>
-            <p className="reg-left-desc">Whether you're a patient looking for medicines or a pharmacist managing inventory — we've got you covered.</p>
+            <h1 className="reg-left-title">
+              Join thousands finding medicines <span>faster</span>
+            </h1>
+            <p className="reg-left-desc">
+              Whether you're a patient looking for medicines or a pharmacist
+              managing inventory — we've got you covered.
+            </p>
           </div>
           <div className="role-cards">
             <div className="role-card">
               <div className="role-card-title">👤 For Users</div>
-              <div className="role-card-desc">Search medicines, compare prices, and contact pharmacies directly.</div>
+              <div className="role-card-desc">
+                Search medicines, compare prices, and contact pharmacies
+                directly.
+              </div>
             </div>
             <div className="role-card">
               <div className="role-card-title">🏪 For Pharmacists</div>
-              <div className="role-card-desc">List your inventory, manage stock, and reach more customers.</div>
+              <div className="role-card-desc">
+                List your inventory, manage stock, and reach more customers.
+              </div>
             </div>
           </div>
         </div>
@@ -217,7 +238,9 @@ export default function Register() {
           <div className="reg-card">
             <div className="reg-header">
               <h2 className="reg-title">Create your account</h2>
-              <p className="reg-sub">Fill in the details below to get started</p>
+              <p className="reg-sub">
+                Fill in the details below to get started
+              </p>
             </div>
 
             <div className="field-row">
@@ -225,18 +248,28 @@ export default function Register() {
                 <label className="field-label">Full Name</label>
                 <div className="field-wrap">
                   <span className="field-icon">👤</span>
-                  <input name="name" className={`field-input ${focused==="name"?"focused":""}`}
-                    placeholder="John Doe" onChange={handleChange}
-                    onFocus={()=>setFocused("name")} onBlur={()=>setFocused("")} />
+                  <input
+                    name="name"
+                    className={`field-input ${focused === "name" ? "focused" : ""}`}
+                    placeholder="John Doe"
+                    onChange={handleChange}
+                    onFocus={() => setFocused("name")}
+                    onBlur={() => setFocused("")}
+                  />
                 </div>
               </div>
               <div>
                 <label className="field-label">Phone</label>
                 <div className="field-wrap">
                   <span className="field-icon">📱</span>
-                  <input name="phone" className={`field-input ${focused==="phone"?"focused":""}`}
-                    placeholder="9876543210" onChange={handleChange}
-                    onFocus={()=>setFocused("phone")} onBlur={()=>setFocused("")} />
+                  <input
+                    name="phone"
+                    className={`field-input ${focused === "phone" ? "focused" : ""}`}
+                    placeholder="9876543210"
+                    onChange={handleChange}
+                    onFocus={() => setFocused("phone")}
+                    onBlur={() => setFocused("")}
+                  />
                 </div>
               </div>
             </div>
@@ -245,9 +278,15 @@ export default function Register() {
               <label className="field-label">Email address</label>
               <div className="field-wrap">
                 <span className="field-icon">✉️</span>
-                <input type="email" name="email" className={`field-input ${focused==="email"?"focused":""}`}
-                  placeholder="you@example.com" onChange={handleChange}
-                  onFocus={()=>setFocused("email")} onBlur={()=>setFocused("")} />
+                <input
+                  type="email"
+                  name="email"
+                  className={`field-input ${focused === "email" ? "focused" : ""}`}
+                  placeholder="you@example.com"
+                  onChange={handleChange}
+                  onFocus={() => setFocused("email")}
+                  onBlur={() => setFocused("")}
+                />
               </div>
             </div>
 
@@ -255,30 +294,50 @@ export default function Register() {
               <label className="field-label">Password</label>
               <div className="field-wrap">
                 <span className="field-icon">🔒</span>
-                <input type="password" name="password" className={`field-input ${focused==="password"?"focused":""}`}
-                  placeholder="Create a strong password" onChange={handleChange}
-                  onFocus={()=>setFocused("password")} onBlur={()=>setFocused("")} />
+                <input
+                  type="password"
+                  name="password"
+                  className={`field-input ${focused === "password" ? "focused" : ""}`}
+                  placeholder="Create a strong password"
+                  onChange={handleChange}
+                  onFocus={() => setFocused("password")}
+                  onBlur={() => setFocused("")}
+                />
               </div>
             </div>
 
-            <div style={{marginBottom: 20}}>
+            <div style={{ marginBottom: 20 }}>
               <label className="field-label">I am a</label>
               <div className="role-toggle">
-                <button className={`role-btn ${form.role==="user"?"active":""}`}
-                  onClick={()=>setForm({...form, role:"user"})}>👤 User</button>
-                <button className={`role-btn ${form.role==="pharmacist"?"active":""}`}
-                  onClick={()=>setForm({...form, role:"pharmacist"})}>🏪 Pharmacist</button>
+                <button
+                  className={`role-btn ${form.role === "user" ? "active" : ""}`}
+                  onClick={() => setForm({ ...form, role: "user" })}
+                >
+                  👤 User
+                </button>
+                <button
+                  className={`role-btn ${form.role === "pharmacist" ? "active" : ""}`}
+                  onClick={() => setForm({ ...form, role: "pharmacist" })}
+                >
+                  🏪 Pharmacist
+                </button>
               </div>
             </div>
 
-            <button className="reg-btn" onClick={handleRegister} disabled={loading}>
+            <button
+              className="reg-btn"
+              onClick={handleRegister}
+              disabled={loading}
+            >
               {loading && <span className="spinner" />}
               {loading ? "Creating account..." : "Create Account"}
             </button>
 
             <p className="reg-footer">
               Already have an account?{" "}
-              <span className="reg-link" onClick={()=>navigate("/login")}>Sign in</span>
+              <span className="reg-link" onClick={() => navigate("/login")}>
+                Sign in
+              </span>
             </p>
           </div>
         </div>
